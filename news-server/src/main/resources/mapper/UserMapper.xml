@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.smxy.newsserver.mapper.UserMapper">
+    <resultMap id="UserResultMap" type="cn.smxy.newsserver.entity.User">
+        <id property="id" column="id"/>
+        <result property="roleId" column="role_id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="nickname" column="nickname"/>
+        <result property="email" column="email"/>
+        <result property="money" column="money"/>
+        <result property="address" column="address"/>
+        <result property="avatarUrl" column="avatar_url"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <association property="role" column="role_id" select="cn.smxy.newsserver.mapper.RoleMapper.getById"/>
+    </resultMap>
+
+    <select id="getAllWithRole" resultMap="UserResultMap">
+        select * from user ORDER BY create_time desc
+    </select>
+
+    <insert id="register" parameterType="cn.smxy.newsserver.entity.User">
+        insert into user(username, password, email)
+        values (#{username}, #{password}, #{email})
+    </insert>
+
+    <select id="getAllWithRoleByCondition" parameterType="String" resultMap="UserResultMap">
+        select * from user
+        <where>
+            <if test="username != null and username != ''">
+                and username like "%"#{username}"%"
+            </if>
+            <if test="email != null and email != ''">
+                and email like "%"#{email}"%"
+            </if>
+            <if test="address != null and address != ''">
+                and address like "%"#{address}"%"
+            </if>
+        </where>
+        limit #{pageNum},#{pageSize}
+
+    </select>
+</mapper>
