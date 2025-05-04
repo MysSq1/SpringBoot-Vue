@@ -1,6 +1,6 @@
-# 新闻商城系统 (News Shopping System)
+# 商城系统 (Shopping System)
 
-基于 Spring Boot 和 Vue.js 的全栈应用程序，提供新闻浏览和商品购物功能。
+基于 Spring Boot 和 Vue.js 的全栈应用程序，提供商品购物功能。
 
 ## 项目结构
 
@@ -83,11 +83,3 @@ java -jar target/news-server-0.0.1-SNAPSHOT.jar
 
 在前端项目中，API 基础 URL 可以在 `news/src/untils` 目录下的配置文件中修改。
 
-## 开发者
-
-- 本项目由 [开发者姓名] 开发
-- 联系方式：[联系信息]
-
-## 许可证
-
-[许可证信息]
